@@ -8,13 +8,18 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String EXAMPLE = "a/123, Clementi Ave 3, #12-34, 231534";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in the format a/BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
     public final String value;
     private boolean isPrivate;
-
+    
+    public Block block;
+    public Street street;
+    public Unit unit;
+    public PostalCode postalCode;
+    
     /**
      * Validates given address.
      *
@@ -26,6 +31,8 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = address;
+        
+        splitAddressToComponents(address);
     }
 
     /**
@@ -34,7 +41,32 @@ public class Address {
     public static boolean isValidAddress(String test) {
         return test.matches(ADDRESS_VALIDATION_REGEX);
     }
+    
+    /**
+     * Assigns the Block, Street, Unit and PostalCode to the variables in Address
+     */
+    public void splitAddressToComponents(String address) {
 
+    	String[] addressComponents = splitAddressByCommas(address);
+
+        this.block = new Block(addressComponents[0]);
+        this.street = new Street(addressComponents[1]);
+        this.unit = new Unit(addressComponents[2]);
+        this.postalCode = new PostalCode(addressComponents[3]);
+    	
+    }
+    
+    /**
+     * Returns an array of string comprising of the components in the address separated by commas. 
+     */
+    public String[] splitAddressByCommas(String address) {
+    	
+    	String[] addressComponents = address.split(",");
+    	
+    	return addressComponents;
+    	
+    }
+    
     @Override
     public String toString() {
         return value;
@@ -54,5 +86,58 @@ public class Address {
 
     public boolean isPrivate() {
         return isPrivate;
+    }
+    
+    public class Block {
+        
+    	private final String block;
+        
+        public Block(String block) {
+    		this.block = block;
+    	}
+        
+        public String getBlock() {
+        	return this.block;
+        }
+    }
+    
+    public class Street {
+    	
+    	private final String street;
+    	
+    	public Street(String street) {
+    		this.street = street;
+    	}
+    	
+    	public String getStreet() {
+    		return this.street;
+    	}
+    	
+    }
+    
+    public class Unit {
+    	
+    	private final String unit;
+    	
+    	public Unit(String unit) {
+    		this.unit = unit;
+    	}
+    	
+    	public String getUnit() {
+    		return this.unit;
+    	}
+    }
+    
+    public class PostalCode {
+    	
+    	private final String postalCode;
+    	
+    	public PostalCode(String postalCode) {
+    		this.postalCode = postalCode;
+    	}
+    	
+    	public String getPostalCode() {
+    		return this.postalCode;
+    	}
     }
 }
