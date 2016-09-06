@@ -31,7 +31,7 @@ public class Tagging {
 	
 	@Override
 	public String toString() {
-		return addOrDel + person.getName().toString() + tag.toString();
+		return addOrDel + " " +  person.getName().toString() + " " + tag.toString();
 	}
 
 }
