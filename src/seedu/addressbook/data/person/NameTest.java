@@ -32,4 +32,13 @@ public class NameTest {
 		assertTrue(n2.isSimilar(n1));
 		assertTrue(n1.isSimilar(n2));
 	}
+	
+	@Test
+	public void isSimilar_sameButDifferentPermutation() throws IllegalValueException {
+		n1 = new Name("ChEeYeo");
+		n2 = new Name("YeoChee");
+		
+		assertTrue(n1.isSimilar(n2));
+	}
+	
 }

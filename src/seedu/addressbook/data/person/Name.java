@@ -70,11 +70,27 @@ public class Name {
 	public boolean isSimilar(Name other) { 
 		if (other == null)
 			return false;
-		else if (this.toString().toLowerCase().equals(other.toString().toLowerCase()))
+		if (this.toString().toLowerCase().equals(other.toString().toLowerCase()))
 			return true;
-		else if (this.toString().toLowerCase().contains(other.toString().toLowerCase())
+		if (this.toString().toLowerCase().contains(other.toString().toLowerCase())
 				|| other.toString().toLowerCase().contains(this.toString().toLowerCase()))
 			return true;
+		if (this.isAnagram(other))
+			return true;
+		
 		return false;
     }
+	
+	/**
+	 * Returns true if words are permutations of each other
+	 */
+	public boolean isAnagram(Name word1) {
+		
+		char[] word1Array = word1.toString().toLowerCase().toCharArray();
+		char[] word2Array = this.toString().toLowerCase().toCharArray();
+		Arrays.sort(word1Array);
+		Arrays.sort(word2Array);
+		
+		return Arrays.equals(word1Array, word2Array);
+	}
 }
