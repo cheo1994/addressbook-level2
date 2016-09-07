@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 /**
+ * Test for seedu.addressbook.common.Utils using Junit
  * @author CheeYeo
  *
  */
@@ -70,6 +71,16 @@ public class UtilsTest {
 	
 	@Test
 	public void elementsAreUnique_uniqueElements() {
-		
+		ArrayList<Object> listOfObjs = new ArrayList<Object>();
+		listOfObjs.add('A');
+		listOfObjs.add("A");
+		listOfObjs.add('a');
+		assertTrue(Utils.elementsAreUnique(listOfObjs));
 	}
+	
+	@Test
+	public void elementsAreUnique_noElements() {
+		assertTrue(Utils.elementsAreUnique(new ArrayList<Object>()));
+	}
+	
 }
