@@ -17,5 +17,11 @@ public class NameTest {
 		n2 = new Name("bobby");
 		assertFalse(n2.isSimilar(n1));
 	}
-
+	
+	@Test
+	public void isSimilar_differentCaseButSameName() throws IllegalValueException {
+		n1 = new Name("chee yeo");
+		n2 = new Name("Chee Yeo");
+		assertTrue(n1.isSimilar(n2));
+	}
 }
