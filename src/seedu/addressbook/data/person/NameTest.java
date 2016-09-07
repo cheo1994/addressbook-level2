@@ -24,4 +24,12 @@ public class NameTest {
 		n2 = new Name("Chee Yeo");
 		assertTrue(n1.isSimilar(n2));
 	}
+	
+	@Test
+	public void isSimilar_isSubString() throws IllegalValueException {
+		n1 = new Name("CHEEYEO");
+		n2 = new Name("CHEEYEOCHEEYEO");
+		assertTrue(n2.isSimilar(n1));
+		assertTrue(n1.isSimilar(n2));
+	}
 }
